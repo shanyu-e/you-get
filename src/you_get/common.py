@@ -18,6 +18,7 @@ force = False
 player = None
 extractor_proxy = None
 cookies_txt = None
+dry_infos = {}
 
 fake_headers = {
     'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
@@ -478,6 +479,8 @@ class DummyProgressBar:
 def download_urls(urls, title, ext, total_size, output_dir='.', refer=None, merge=True, faker=False):
     assert urls
     if dry_run:
+        dry_infos.clear()
+        dry_infos.update({'urls':urls, 'ext':ext, 'total_size':total_size})
         print('Real URLs:\n%s\n' % urls)
         return
 
